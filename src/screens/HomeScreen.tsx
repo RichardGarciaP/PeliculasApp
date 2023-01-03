@@ -9,7 +9,7 @@ import HorizontalSlider from '../components/horizontal-slider';
 const {width: windowWith} = Dimensions.get('window');
 
 const HomeScreen = () => {
-  const {actualMovies, isLoading} = useMovies();
+  const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
 
   const {top} = useSafeAreaInsets();
 
@@ -26,16 +26,19 @@ const HomeScreen = () => {
       <View style={{marginTop: top + 20}}>
         <View style={{height: 440}}>
           <Carousel
-            data={actualMovies}
+            data={nowPlaying}
             renderItem={baseData => <MovieCard movie={baseData.item} />}
             sliderWidth={windowWith}
             itemWidth={300}
             vertical={false}
+            inactiveSlideOpacity={0.9}
           />
         </View>
 
         {/* Peliculas Populares */}
-        <HorizontalSlider title="En Cine" movies={actualMovies} />
+        <HorizontalSlider title="Popular" movies={popular} />
+        <HorizontalSlider title="Top Rated" movies={topRated} />
+        <HorizontalSlider title="Up Coming" movies={upcoming} />
       </View>
     </ScrollView>
   );
